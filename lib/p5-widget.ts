@@ -1,6 +1,7 @@
 import * as defaults from "./defaults";
 
 const MY_FILENAME = 'p5-widget.js';
+const IFRAME_ID = 'p5-widget';
 const IFRAME_FILENAME = 'p5-widget.html';
 const IFRAME_STYLE = [
   'width: 100%',
@@ -98,7 +99,7 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
   let iframe = document.createElement('iframe');
   let height = getDataHeight(el);
   let previewWidth = parseInt(el.getAttribute('data-preview-width'));
-  let baseSketchURL = absoluteURL(el.getAttribute('data-base-url'));
+  let baseSketchURL = absoluteURL(el.getAttribute('data-base-url'));  
   let p5version = el.getAttribute('data-p5-version');
   let maxRunTime = parseInt(el.getAttribute('data-max-run-time'));
   let autoplay = el.hasAttribute('data-autoplay');
@@ -112,6 +113,7 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
     qsArgs.push('sketch=' + encodeURIComponent(sketch));
     style.push('min-height: ' + height + 'px');
     url = myBaseURL + IFRAME_FILENAME + '?' + qsArgs.join('&');
+    iframe.setAttribute('id', IFRAME_ID);
     iframe.setAttribute('src', url);
     iframe.setAttribute('style', style.join('; '));
     el.parentNode.replaceChild(iframe, el);
