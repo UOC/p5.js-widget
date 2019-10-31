@@ -109,6 +109,7 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
   ];
   let style = IFRAME_STYLE.slice();
   let showPreview = el.getAttribute('data-show-preview') !== null;
+  let previewInitialEmpty = el.getAttribute('data-preview-initial-empty') !== null;
 
   function makeWidget(sketch: string) {
     qsArgs.push('sketch=' + encodeURIComponent(sketch));
@@ -143,6 +144,10 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
   if (showPreview) {
     qsArgs.push('showPreview=on');
   }
+  if (previewInitialEmpty) {
+    qsArgs.push('previewInitialEmpty=on');
+  }
+
   if (el.src && el.textContent && el.textContent.trim()) {
     return makeWidget([
       '// Your widget includes both a "src" attribute and inline script',

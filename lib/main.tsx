@@ -24,6 +24,7 @@ function start() {
   let previewWidth = parseInt(qs['previewWidth']);
   let maxRunTime = parseInt(qs['maxRunTime'])
   let showPreview = (qs['showPreview'] === 'on');
+  let previewInitialEmpty = (qs['previewInitialEmpty'] === 'on');
   if (isNaN(previewWidth)) {
     previewWidth = defaults.PREVIEW_WIDTH;
   }
@@ -43,6 +44,7 @@ function start() {
          maxRunTime={maxRunTime}
          autoplay={autoplay}
          showPreview={showPreview}
+         previewInitialEmpty={previewInitialEmpty}
          />,
     document.getElementById('app-holder')
   );

@@ -19,7 +19,8 @@ interface AppProps {
   baseSketchURL: string,
   autosaver?: Autosaver,
   autoplay?: boolean,
-  showPreview?: boolean
+  showPreview?: boolean,
+  previewInitialEmpty?: boolean
 }
 
 // Ugh, in practice, not all of these are truly optional, but we need
@@ -50,7 +51,7 @@ export default class App extends PureComponent<AppProps, AppState> {
     this.state = {
       canUndo: false,
       canRedo: false,
-      previewContent: this.props.initialContent,
+      previewContent: this.props.previewInitialEmpty ? '' : this.props.initialContent,
       editorContent: this.props.initialContent
     };
   }
