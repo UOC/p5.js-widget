@@ -23,6 +23,7 @@ function start() {
   let p5version = qs['p5version'] || defaults.P5_VERSION;
   let previewWidth = parseInt(qs['previewWidth']);
   let maxRunTime = parseInt(qs['maxRunTime'])
+  let domain = qs['domain']
   let showPreview = (qs['showPreview'] === 'on');
   let hideToolbar = (qs['hideToolbar'] === 'on');
   let previewInitialEmpty = (qs['previewInitialEmpty'] === 'on');

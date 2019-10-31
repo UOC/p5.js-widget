@@ -34,6 +34,10 @@ function getMyBaseURL(url: string) {
   return baseURL;
 }
 
+function getMyBaseHost() {
+  return window.location.protocol + '//' + window.location.host + (window.location.port !== '' ? ':' + window.location.port : '');
+}
+
 function getMyScriptEl() {
   return (
     document.currentScript ||
@@ -110,6 +114,7 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
   let style = IFRAME_STYLE.slice();
   let showPreview = el.getAttribute('data-show-preview') !== null;
   let hideToolbar = el.getAttribute('data-hide-toolbar') !== null;
+  let domain = getMyBaseHost();
   let previewInitialEmpty = el.getAttribute('data-preview-initial-empty') !== null;
 
   function makeWidget(sketch: string) {
@@ -152,6 +157,10 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
 
   if (previewInitialEmpty) {
     qsArgs.push('previewInitialEmpty=on');
+  }
+
+  if (domain) {
+    qsArgs.push('domain=' + encodeURIComponent(domain));
   }
 
   if (el.src && el.textContent && el.textContent.trim()) {
