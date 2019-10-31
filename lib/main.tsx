@@ -69,6 +69,9 @@ function start() {
     if (e.data.name === 'setSource') {
       app.changeContent(e.data.sourceCode);
     }
+    if (e.data.name === 'getSource') {
+      app.notifyContent('save');
+    }    
   }, false);  
 }
 
