@@ -120,6 +120,13 @@ export default class App extends PureComponent<AppProps, AppState> {
     this.props.onNotify({name, sourceCode:this.state.editorContent})
   }
 
+  changeContent = (content: string) => {
+    this.setState({
+      isPlaying: false,
+      editorContent: content
+    });
+  }
+
   refs: {
     [key: string]: (any),
     editor: Editor
