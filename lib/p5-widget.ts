@@ -109,6 +109,7 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
   ];
   let style = IFRAME_STYLE.slice();
   let showPreview = el.getAttribute('data-show-preview') !== null;
+  let hideToolbar = el.getAttribute('data-hide-toolbar') !== null;
   let previewInitialEmpty = el.getAttribute('data-preview-initial-empty') !== null;
 
   function makeWidget(sketch: string) {
@@ -144,6 +145,11 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
   if (showPreview) {
     qsArgs.push('showPreview=on');
   }
+
+  if (hideToolbar) {
+    qsArgs.push('hideToolbar=on');
+  }
+
   if (previewInitialEmpty) {
     qsArgs.push('previewInitialEmpty=on');
   }

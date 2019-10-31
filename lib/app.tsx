@@ -20,7 +20,8 @@ interface AppProps {
   autosaver?: Autosaver,
   autoplay?: boolean,
   showPreview?: boolean,
-  previewInitialEmpty?: boolean
+  previewInitialEmpty?: boolean,
+  hideToolbar?: boolean
 }
 
 // Ugh, in practice, not all of these are truly optional, but we need
@@ -129,12 +130,12 @@ export default class App extends PureComponent<AppProps, AppState> {
 
     return (
       <div className="app">
-        <Toolbar
+        {!this.props.hideToolbar ? <Toolbar
          onPlayClick={this.handlePlayClick}
          onStopClick={this.state.isPlaying && this.handleStopClick}
          onUndoClick={this.state.canUndo && this.handleUndoClick}
          onRedoClick={this.state.canRedo && this.handleRedoClick}
-         onRevertClick={canRevert && this.handleRevertClick} />
+         onRevertClick={canRevert && this.handleRevertClick} /> : null}
         <div className="panes">
           <Editor ref="editor"
                   content={this.state.editorContent}
