@@ -21,7 +21,8 @@ interface AppProps {
   autoplay?: boolean,
   showPreview?: boolean,
   previewInitialEmpty?: boolean,
-  hideToolbar?: boolean
+  hideToolbar?: boolean,
+  onNotify(data: Object): any
 }
 
 // Ugh, in practice, not all of these are truly optional, but we need
