@@ -60,6 +60,16 @@ function start() {
   // notify load
   notify({name:'load'});
 
+  // set eventListener for postMessaging
+  let eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+  let eventer = window[eventMethod];
+  let messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+  eventer(messageEvent, function(e: any) {
+    if (e.data.name === 'setSource') {
+      app.changeContent(e.data.sourceCode);
+    }
+  }, false);  
 }
 
 window.addEventListener('load', start);
