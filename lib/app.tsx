@@ -95,6 +95,7 @@ export default class App extends PureComponent<AppProps, AppState> {
   }
 
   handlePlayClick = () => {
+    this.notifyContent('play');
     this.setState((prevState, props) => ({
       isPlaying: true,
       previewContent: prevState.editorContent,
@@ -113,6 +114,10 @@ export default class App extends PureComponent<AppProps, AppState> {
 
   handleRedoClick = () => {
     this.refs.editor.redo();
+  }
+
+  notifyContent = (name: string) => {
+    this.props.onNotify({name, sourceCode:this.state.editorContent})
   }
 
   refs: {
