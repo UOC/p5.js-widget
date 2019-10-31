@@ -41,7 +41,7 @@ function start() {
 
   initialContent = initialContent.replace(/\r\n/g, '\n').trim();
 
-  ReactDOM.render(
+  let app = ReactDOM.render(
     <App initialContent={initialContent}
          autosaver={new SessionStorageAutosaver(id)}
          baseSketchURL={baseSketchURL}
@@ -55,7 +55,8 @@ function start() {
          onNotify={notify}
          />,
     document.getElementById('app-holder')
-  );
+  ) as App;
+
   // notify load
   notify({name:'load'});
 
