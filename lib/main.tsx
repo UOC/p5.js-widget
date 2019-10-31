@@ -75,6 +75,9 @@ function start() {
     if (e.data.name === 'play') {
       app.handlePlayClick()
     }
+    if (e.data.name === 'stop') {
+      app.handleStopClick()
+    }
   }, false);  
 }
 
