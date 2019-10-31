@@ -23,6 +23,7 @@ function start() {
   let p5version = qs['p5version'] || defaults.P5_VERSION;
   let previewWidth = parseInt(qs['previewWidth']);
   let maxRunTime = parseInt(qs['maxRunTime'])
+  let showPreview = (qs['showPreview'] === 'on');
   if (isNaN(previewWidth)) {
     previewWidth = defaults.PREVIEW_WIDTH;
   }
@@ -40,7 +41,9 @@ function start() {
          p5version={p5version}
          previewWidth={previewWidth}
          maxRunTime={maxRunTime}
-         autoplay={autoplay} />,
+         autoplay={autoplay}
+         showPreview={showPreview}
+         />,
     document.getElementById('app-holder')
   );
 }

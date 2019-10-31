@@ -18,7 +18,8 @@ interface AppProps {
   maxRunTime: number,
   baseSketchURL: string,
   autosaver?: Autosaver,
-  autoplay?: boolean
+  autoplay?: boolean,
+  showPreview?: boolean
 }
 
 // Ugh, in practice, not all of these are truly optional, but we need
@@ -139,7 +140,7 @@ export default class App extends PureComponent<AppProps, AppState> {
                   errorLine={errorLine}
                   onChange={this.handleEditorChange} />
           <div className="preview-holder-wrapper">
-          {this.state.isPlaying
+          {this.state.isPlaying || this.props.showPreview
             ? <Preview content={this.state.previewContent}
                        baseSketchURL={this.props.baseSketchURL}
                        p5version={this.props.p5version}
