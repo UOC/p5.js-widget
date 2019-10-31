@@ -35,6 +35,10 @@ function start() {
     maxRunTime = defaults.MAX_RUN_TIME;
   }
 
+  let notify = function (data) {
+    parent.postMessage(data, domain);
+  }
+
   initialContent = initialContent.replace(/\r\n/g, '\n').trim();
 
   ReactDOM.render(
@@ -48,9 +52,13 @@ function start() {
          showPreview={showPreview}
          hideToolbar={hideToolbar}
          previewInitialEmpty={previewInitialEmpty}
+         onNotify={notify}
          />,
     document.getElementById('app-holder')
   );
+  // notify load
+  notify({name:'load'});
+
 }
 
 window.addEventListener('load', start);
