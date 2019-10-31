@@ -72,6 +72,9 @@ function start() {
     if (e.data.name === 'getSource') {
       app.notifyContent('save');
     }    
+    if (e.data.name === 'play') {
+      app.handlePlayClick()
+    }
   }, false);  
 }
 
