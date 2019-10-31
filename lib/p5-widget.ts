@@ -5,7 +5,7 @@ const IFRAME_FILENAME = 'p5-widget.html';
 const IFRAME_STYLE = [
   'width: 100%',
   'background-color: white',
-  'border: 1px solid #ec245e',
+  'border: 1px solid #000078',
   'box-sizing: border-box'
 ];
 const AVOID_MIXED_CONTENT_WARNINGS = true;

@@ -3,6 +3,7 @@
   --light-pink: #ffe5ea;
   --dark-pink: #ec245e;
   --blueish: #30b8e6;
+  --uocDefault: #000078;
   --ui-font: Montserrat, sans-serif;
   --code-font: "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
                "source-code-pro", monospace;
@@ -24,9 +25,9 @@ button {
   font-family: var(--ui-font);
   font-weight: normal;
   color: black;
-  border: 1px solid var(--dark-pink);
+  border: 1px solid var(--uocDefault);
   background: inherit;
-  color: var(--dark-pink);
+  color: var(--uocDefault);
   border-radius: 2px;
   padding: 2px 12px;
   cursor: pointer;
@@ -52,7 +53,7 @@ a.p5-logo img {
 }
 
 .open-iconic {
-  fill: var(--dark-pink);
+  fill: var(--uocDefault);
   height: 16px;
   width: 16px;
   vertical-align: -10%;
@@ -65,7 +66,7 @@ a.p5-logo img {
 }
 
 .status-bar {
-  border-top: 1px solid var(--dark-pink);
+  border-top: 1px solid var(--uocDefault);
   background: var(--very-light-gray);
   min-height: 1em;
   font-family: var(--code-font);
@@ -89,7 +90,7 @@ a.p5-logo img {
 .panes {
   flex: 1;
   display: flex;
-  border-top: 1px solid var(--dark-pink);
+  border-top: 1px solid var(--uocDefault);
 }
 
 
