@@ -67,6 +67,10 @@ function getDataHeight(el: HTMLScriptElement) {
   return height;
 }
 
+function isDefined(height: number) {
+  return height !== defaults.HEIGHT;
+}
+
 function absoluteURL(url: string) {
   let a = document.createElement('a');
   a.setAttribute('href', url);
@@ -119,7 +123,11 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
 
   function makeWidget(sketch: string) {
     qsArgs.push('sketch=' + encodeURIComponent(sketch));
-    style.push('min-height: ' + height + 'px');
+    if (isDefined(height)) {
+      style.push('min-height: ' + height + 'px');
+    } else {
+      style.push('height: 100%');
+    }
     url = myBaseURL + IFRAME_FILENAME + '?' + qsArgs.join('&');
     iframe.setAttribute('id', IFRAME_ID);
     iframe.setAttribute('src', url);
@@ -208,7 +216,12 @@ function lazilyReplaceScriptWithWidget(el: HTMLScriptElement) {
   el.style.display = 'block';
   el.style.fontSize = '0';
   el.style.width = '100%';
-  el.style.minHeight = height + 'px';
+  if (isDefined(height)) {
+    el.style.minHeight = height + 'px';
+  } else {
+    el.style.height = 'height: 100%';
+  }
+  
   el.style.background = '#f0f0f0';
 
   if (!el.hasAttribute('data-id')) {
