@@ -5,6 +5,7 @@ const IFRAME_ID = 'p5-widget';
 const IFRAME_FILENAME = 'p5-widget.html';
 const IFRAME_STYLE = [
   'width: 100%',
+  'height: 100%',
   'background-color: white',
   'border: 1px solid #000078',
   'box-sizing: border-box'
@@ -67,10 +68,6 @@ function getDataHeight(el: HTMLScriptElement) {
   return height;
 }
 
-function isDefined(height: number) {
-  return height !== defaults.HEIGHT;
-}
-
 function absoluteURL(url: string) {
   let a = document.createElement('a');
   a.setAttribute('href', url);
@@ -123,11 +120,7 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
 
   function makeWidget(sketch: string) {
     qsArgs.push('sketch=' + encodeURIComponent(sketch));
-    if (isDefined(height)) {
-      style.push('min-height: ' + height + 'px');
-    } else {
-      style.push('height: 100%');
-    }
+    style.push('min-height: ' + height + 'px');
     url = myBaseURL + IFRAME_FILENAME + '?' + qsArgs.join('&');
     iframe.setAttribute('id', IFRAME_ID);
     iframe.setAttribute('src', url);
@@ -216,12 +209,8 @@ function lazilyReplaceScriptWithWidget(el: HTMLScriptElement) {
   el.style.display = 'block';
   el.style.fontSize = '0';
   el.style.width = '100%';
-  if (isDefined(height)) {
-    el.style.minHeight = height + 'px';
-  } else {
-    el.style.height = 'height: 100%';
-  }
-  
+  el.style.height = '100%';
+  el.style.minHeight = height + 'px';  
   el.style.background = '#f0f0f0';
 
   if (!el.hasAttribute('data-id')) {
