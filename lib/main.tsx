@@ -22,6 +22,7 @@ function start() {
   let initialContent = qs['sketch'] || defaultSketchJS;
   let p5version = qs['p5version'] || defaults.P5_VERSION;
   let previewWidth = parseInt(qs['previewWidth']);
+  let previewRelativeWidth = parseInt(qs['previewRelativeWidth']);
   let maxRunTime = parseInt(qs['maxRunTime'])
   let domain = qs['domain']
   let showPreview = (qs['showPreview'] === 'on');
@@ -29,6 +30,10 @@ function start() {
   let previewInitialEmpty = (qs['previewInitialEmpty'] === 'on');
   if (isNaN(previewWidth)) {
     previewWidth = defaults.PREVIEW_WIDTH;
+  }
+
+  if (isNaN(previewRelativeWidth)) {
+    previewRelativeWidth = defaults.PREVIEW_RELATIVE_WIDTH;
   }
 
   if (isNaN(maxRunTime)) {
@@ -47,6 +52,7 @@ function start() {
          baseSketchURL={baseSketchURL}
          p5version={p5version}
          previewWidth={previewWidth}
+         previewRelativeWidth={previewRelativeWidth}
          maxRunTime={maxRunTime}
          autoplay={autoplay}
          showPreview={showPreview}

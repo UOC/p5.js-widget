@@ -11,6 +11,7 @@ const LOOP_CHECK_FUNC_NAME = '__loopCheck';
 interface Props {
   p5version: string,
   width: number,
+  relativeWidth: number,
   content: string,
   baseSketchURL: string,
   timestamp: number,
@@ -48,7 +49,8 @@ export default class Preview extends PureComponent<Props, State> {
     let iframe = document.createElement('iframe');
 
     iframe.setAttribute('src', 'preview-frame.html');
-    iframe.setAttribute('width', this.props.width.toString());
+    let width = (this.props.relativeWidth > 0) ? this.props.relativeWidth + '%' : this.props.width.toString();
+    iframe.setAttribute('width', width);
     iframe.addEventListener('load', () => {
       // Note that this should never be called if we're already unmounted,
       // since that means the iframe will have been removed from the DOM,

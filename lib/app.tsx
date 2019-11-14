@@ -14,6 +14,7 @@ interface ErrorMessage {
 interface AppProps {
   initialContent: string,
   previewWidth: number,
+  previewRelativeWidth: number,
   p5version: string,
   maxRunTime: number,
   baseSketchURL: string,
@@ -161,6 +162,7 @@ export default class App extends PureComponent<AppProps, AppState> {
                        p5version={this.props.p5version}
                        maxRunTime={this.props.maxRunTime}
                        width={this.props.previewWidth}
+                       relativeWidth={this.props.previewRelativeWidth}
                        timestamp={this.state.startPlayTimestamp}
                        onError={this.handlePreviewError} />
             : null}

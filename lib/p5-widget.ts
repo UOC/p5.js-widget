@@ -104,6 +104,7 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
   let iframe = document.createElement('iframe');
   let height = getDataHeight(el);
   let previewWidth = parseInt(el.getAttribute('data-preview-width'));
+  let previewRelativeWidth = parseInt(el.getAttribute('data-preview-relative-width'));
   let baseSketchURL = absoluteURL(el.getAttribute('data-base-url'));  
   let p5version = el.getAttribute('data-p5-version');
   let maxRunTime = parseInt(el.getAttribute('data-max-run-time'));
@@ -130,6 +131,10 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
 
   if (!isNaN(previewWidth) && previewWidth >= 0) {
     qsArgs.push('previewWidth=' + previewWidth);
+  }
+
+  if (!isNaN(previewRelativeWidth) && previewRelativeWidth >= 0) {
+    qsArgs.push('previewRelativeWidth=' + previewRelativeWidth);
   }
 
   if (!isNaN(maxRunTime) && maxRunTime >= 0) {
