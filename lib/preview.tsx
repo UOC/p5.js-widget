@@ -65,6 +65,13 @@ export default class Preview extends PureComponent<Props, State> {
     this._iframe = iframe;
   }
 
+  stop() {
+    if (this._iframe) {
+      let frame = this._iframe.contentWindow as PreviewFrame.Runner;
+      frame.stopSketch()
+    }
+  }
+
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (prevProps.timestamp !== this.props.timestamp) {
       this.resetIframe();

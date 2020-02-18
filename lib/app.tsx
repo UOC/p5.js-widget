@@ -107,6 +107,7 @@ export default class App extends PureComponent<AppProps, AppState> {
 
   handleStopClick = () => {
     this.setState({ isPlaying: false });
+    this.refs.preview.stop();
   }
 
   handleUndoClick = () => {
@@ -130,7 +131,8 @@ export default class App extends PureComponent<AppProps, AppState> {
 
   refs: {
     [key: string]: (any),
-    editor: Editor
+    editor: Editor,
+    preview: Preview
   }
 
   render() {
@@ -157,7 +159,8 @@ export default class App extends PureComponent<AppProps, AppState> {
                   onChange={this.handleEditorChange} />
           <div className="preview-holder-wrapper">
           {this.state.isPlaying || this.props.showPreview
-            ? <Preview content={this.state.previewContent}
+            ? <Preview ref="preview"
+                       content={this.state.previewContent}
                        baseSketchURL={this.props.baseSketchURL}
                        p5version={this.props.p5version}
                        maxRunTime={this.props.maxRunTime}

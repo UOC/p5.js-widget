@@ -86,6 +86,10 @@ function setBaseURL(url: string) {
   document.head.appendChild(base);
 }
 
+function stopSketch() {
+  try { global.noLoop(); } catch (e) {}
+};
+
 function startSketch(sketch: string, p5version: string, maxRunTime: number,
                      loopCheckFuncName: string, baseURL: string,
                      errorCb: PreviewFrame.ErrorReporter) {
@@ -128,3 +132,4 @@ function startSketch(sketch: string, p5version: string, maxRunTime: number,
 }
 
 global.startSketch = startSketch;
+global.stopSketch = stopSketch;
