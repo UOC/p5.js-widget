@@ -92,7 +92,8 @@ function stopSketch() {
 
 function startSketch(sketch: string, p5version: string, maxRunTime: number,
                      loopCheckFuncName: string, baseURL: string,
-                     errorCb: PreviewFrame.ErrorReporter) {
+                     errorCb: PreviewFrame.ErrorReporter,
+                     consoleCb: PreviewFrame.ConsoleReporter) {
   let sketchScript = document.createElement('script');
   let loopChecker = LoopChecker(sketch, loopCheckFuncName, maxRunTime);
 
@@ -129,6 +130,21 @@ function startSketch(sketch: string, p5version: string, maxRunTime: number,
       new global.p5();
     }
   });
+
+  // console log
+  let oldConsoleLog = console.log;
+  console.log = function() {
+    var elements:string[] = new Array(arguments.length);
+    for (var i = 0; i < arguments.length; i++) {
+      if (typeof arguments[i] == 'object') {
+        elements[i] = JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]
+      } else {
+        elements[i] = arguments[i]
+      }
+    }
+    consoleCb(elements);
+    oldConsoleLog(elements);
+  }
 }
 
 global.startSketch = startSketch;

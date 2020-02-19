@@ -10,13 +10,18 @@ export interface ErrorReporter {
   (message: string, line?: number): any
 }
 
+export interface ConsoleReporter {
+  (message: string[]): any
+}
+
 // Eventually we might want the preview frame to exist on a separate
 // origin for security, which means that we'd have to use postMessage()
 // to communicate with it. Thus this interface needs to be asynchronous.
 export interface Runner extends Window {
   startSketch: (sketch: string, p5version: string, maxRunTime: number,
                 loopCheckFuncName: string, baseURL: string,
-                errorCb: ErrorReporter) => void;
-                
-  stopSketch: () => void;
+                errorCb: ErrorReporter,
+                consoleCb: ConsoleReporter) => void
+
+  stopSketch: () => void
 }

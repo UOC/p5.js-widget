@@ -71,12 +71,20 @@ a.p5-logo img {
   min-height: 1em;
   font-family: var(--code-font);
   padding: 8px;
+  max-height: 10em;
+  overflow: scroll;
 }
 
 .error-message .error-message-line {
   font-family: var(--ui-font);
   font-weight: normal;
   color: red;
+}
+
+.log-message {
+  margin: 0;
+  font-weight: normal;
+  font-size: smaller;
 }
 
 .toolbar {

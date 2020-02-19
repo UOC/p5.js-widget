@@ -11,6 +11,10 @@ interface ErrorMessage {
   line?: number
 }
 
+interface LogMessage {
+  message: string
+}
+
 interface AppProps {
   initialContent: string,
   previewWidth: number,
@@ -23,7 +27,8 @@ interface AppProps {
   showPreview?: boolean,
   previewInitialEmpty?: boolean,
   hideToolbar?: boolean,
-  onNotify(data: Object): any
+  onNotify(data: Object): any,
+  initialLog?: string[]
 }
 
 // Ugh, in practice, not all of these are truly optional, but we need
@@ -39,6 +44,7 @@ interface AppState {
   previewContent?: string
   editorContent?: string
   lastError?: ErrorMessage
+  logs?: Array<LogMessage>
 }
 
 let ErrorMessage = (props: ErrorMessage) => (
@@ -48,6 +54,12 @@ let ErrorMessage = (props: ErrorMessage) => (
   </div>
 );
 
+let LogMessage = (props) => (
+  <p key={props.index} className="log-message">
+    {props.message.message}
+  </p>
+);
+
 export default class App extends PureComponent<AppProps, AppState> {
   constructor(props) {
     super(props);
@@ -55,7 +67,8 @@ export default class App extends PureComponent<AppProps, AppState> {
       canUndo: false,
       canRedo: false,
       previewContent: this.props.previewInitialEmpty ? '' : this.props.initialContent,
-      editorContent: this.props.initialContent
+      editorContent: this.props.initialContent,
+      logs: []
     };
   }
 
@@ -88,6 +101,15 @@ export default class App extends PureComponent<AppProps, AppState> {
     });
   }
 
+  handleConsoleLog = (message: string[]) => {
+    let logs = message.map(m => ({message: m})) as [LogMessage];
+    const messages = this.state.logs.concat(logs);
+
+    this.setState({
+      logs: messages
+    });  
+  }
+
   handleRevertClick = () => {
     this.setState({
       isPlaying: false,
@@ -101,7 +123,8 @@ export default class App extends PureComponent<AppProps, AppState> {
       isPlaying: true,
       previewContent: prevState.editorContent,
       startPlayTimestamp: Date.now(),
-      lastError: null
+      lastError: null,
+      logs: []
     }));
   }
 
@@ -167,7 +190,8 @@ export default class App extends PureComponent<AppProps, AppState> {
                        width={this.props.previewWidth}
                        relativeWidth={this.props.previewRelativeWidth}
                        timestamp={this.state.startPlayTimestamp}
-                       onError={this.handlePreviewError} />
+                       onError={this.handlePreviewError} 
+                       onLog={this.handleConsoleLog} />
             : null}
           </div>
         </div>
@@ -175,6 +199,7 @@ export default class App extends PureComponent<AppProps, AppState> {
           {this.state.lastError
            ? <ErrorMessage {...this.state.lastError} />
            : null}
+           {this.state.logs.map((m, i) => <LogMessage message={m} index={i} />)}
         </div>
       </div>
     );
