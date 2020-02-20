@@ -68,7 +68,7 @@ a.p5-logo img {
 .status-bar {
   border-top: 1px solid var(--uocDefault);
   background: var(--very-light-gray);
-  min-height: 1em;
+  min-height: 3em;
   font-family: var(--code-font);
   padding: 8px;
   max-height: 10em;
